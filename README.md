@@ -72,7 +72,7 @@ Then turn on Pages as in step 3 above.
 
 - Slide 9: click **Approve fix** to run the remediation demo live.
 - Slide 7: click **Replay grouping** to replay the alert merge.
-- Slide 13: click the film to play it with sound.
+- Slide 13: click the film to play it with sound. Click again to pause/stop. Leaving the slide resets it.
 
 Present in **Chrome or Edge** for the smoothest animation.
 

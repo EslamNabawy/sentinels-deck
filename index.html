@@ -804,7 +804,7 @@ const started={};
 const timers={};
 function clearT(i){(timers[i]||[]).forEach(t=>{clearTimeout(t);clearInterval(t)});timers[i]=[]}
 function T(i,fn,ms,rep){(timers[i]=timers[i]||[]).push(rep?setInterval(fn,ms):setTimeout(fn,ms))}
-function leave(i){clearT(i); if(i===12){const v=document.getElementById('film');v.pause()}}
+function leave(i){clearT(i); if(i===12){const v=document.getElementById('film');v.pause();v.currentTime=0;v.controls=false}}
 function enter(i){
   started[i]=true; clearT(i);
   const id=i+1;
@@ -1010,7 +1010,10 @@ function pipeRun(i){
 /* slide 13 film */
 const film=document.getElementById('film'),playBtn=document.getElementById('playBtn');
 playBtn.onclick=e=>{e.stopPropagation();film.controls=true;playBtn.hidden=true;film.play().catch(()=>{})};
-film.addEventListener('ended',()=>{playBtn.hidden=false;film.controls=false});
+film.onclick=e=>{e.stopPropagation();if(film.paused){film.controls=true;playBtn.hidden=true;film.play().catch(()=>{})}else{film.pause()}};
+film.addEventListener('play',()=>{playBtn.hidden=true});
+film.addEventListener('pause',()=>{playBtn.hidden=false});
+film.addEventListener('ended',()=>{film.currentTime=0;film.controls=false;playBtn.hidden=false});
 
 /* boot */
 fit();
